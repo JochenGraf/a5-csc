@@ -1,0 +1,35 @@
+
+h1 {
+    padding-top:100px;
+}
+
+h2 {
+    padding-top:70px;
+}
+
+h3 {
+    padding-top:40px;
+}
+
+h4 {
+    padding-top:30px;
+}
+
+table, dl {
+    margin-top:20px;
+    margin-bottom:30px;
+}
+
+.top {
+    padding-top:30px;
+}
+
+#toc ul {
+    position: relative;
+    display: block;
+    margin-left:15px;
+}
+
+pre {
+    max-height: 300px;
+}

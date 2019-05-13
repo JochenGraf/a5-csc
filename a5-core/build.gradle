@@ -1,0 +1,6 @@
+group 'a5.core'
+dependencies {
+    compile 'org.basex:basex:8.5'
+    compile 'org.grails.plugins:external-config:1.1.0'
+    compile 'org.grails:grails-datastore-rest-client:5.0.0.RC2'
+}

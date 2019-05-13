@@ -1,0 +1,2 @@
+include 'a5-core'
+include 'a5-slave-ffmpeg'

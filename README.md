@@ -102,7 +102,7 @@ New repositories can be added here.
 
 ### Repository Configuration
 
-Example: `./dist/testdata/a5-1/repository.xml`
+Example: `./dist/testdata/a5-2/repository.xml`
 ```$xml
 <repository>
     <index>

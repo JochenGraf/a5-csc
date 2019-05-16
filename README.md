@@ -198,11 +198,3 @@ Example: `./dist/testdata/a5-1/repository.xml`
     </index>
 </repository>
 ```
-The Media API depends on the Object API.
-
-Object API configuration:
-* define a `<fileFilter>` to match all CMDI metadata files that reference media files
-* select a object mapper. `a5.mapper.nl.mpi.cmdi.CmdiObjectCollectionMapper` should work for the CMDI metadata at MPI,
-see: `./a5-core/src/main/groovy/a5/mapper/nl/mpi/cmdi/CmdiObjectCollectionMapper.groovy`
-* if the mapping was successful, media can be accessed by their `<cmd:ResourceRef>`, e.g.,
-https://grails-prod.rrz.uni-koeln.de/ka3-a5-core/api/media/lac/hdl:11341/00-0000-0000-0000-1C93-8

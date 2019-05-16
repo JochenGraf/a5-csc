@@ -107,37 +107,64 @@ Example: `./dist/testdata/a5-1/repository.xml`
 <repository>
     <index>
         <object>
-            <fileFilter>.*.cmdi</fileFilter>
-            <mapper type="groovy">a5.mapper.nl.mpi.cmdi.CmdiObjectCollectionMapper</mapper>
+            <fileFilter>.*.imdi</fileFilter>
+            <mapper type="groovy">a5.mapper.de.unikoeln.dch.imdi.ImdiObjectCollectionMapper</mapper>
         </object>
         <query>
-            <fileFilter>.*.cmdi</fileFilter>
+            <fileFilter>.*.imdi</fileFilter>
             <namespace>
-                <cmd>http://www.clarin.eu/cmd/</cmd>
+                <imdi>http://www.mpi.nl/IMDI/Schema/IMDI</imdi>
             </namespace>
-            <mapper type="xquery">
+            <mapper>
                 <id fulltext="false">
-                    /cmd:CMD/cmd:Header/cmd:MdSelfLink
+                    /imdi:METATRANSCRIPT/@ArchiveHandle
                 </id>
-                <Title facet="false">
-                    /cmd:CMD/cmd:Components/cmd:lat-session/cmd:Title |
-                    /cmd:CMD/cmd:Components/cmd:lat-session/cmd:Name |
-                    /cmd:CMD/cmd:Components/cmd:lat-corpus/cmd:Corpus/cmd:Title |
-                    /cmd:CMD/cmd:Components/cmd:lat-corpus/cmd:Corpus/cmd:Name
+                <Title>
+                    //imdi:Session/imdi:Title
                 </Title>
+                <Country>
+                    //imdi:Session/imdi:MDGroup/imdi:Location/imdi:Country
+                </Country>
+                <Region>
+                    //imdi:Session/imdi:MDGroup/imdi:Location/imdi:Region
+                </Region>
                 <Description>
-                    //cmd:lat-session//cmd:Description |
-                    //cmd:lat-corpus//cmd:Description
+                    //imdi:Session/imdi:Description |
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:Description
                 </Description>
-                <Language facet="true">
-                    /cmd:CMD/cmd:Components/cmd:Session/cmd:MDGroup/cmd:Content/cmd:Content_Languages/cmd:Content_Language/cmd:Name |
-                    /cmd:CMD/cmd:Components/cmd:Song/cmd:Language/cmd:LanguageName |
-                    //@xml:lang
-                </Language>
-                <Format facet="true">
-                    /cmd:CMD/cmd:Resources/cmd:ResourceProxyList/cmd:ResourceProxy/cmd:ResourceType/@mimetype |
-                    /cmd:CMD/cmd:Components/cmd:Session/cmd:Resources/cmd:WrittenResource/cmd:Format
-                </Format>
+                <Keywords>
+                    //imdi:Session/imdi:MDGroup/imdi:Keys/imdi:Key |
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:Genre |
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:SubGenre |
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:CommunicationContext/imdi:Interactivity |
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:CommunicationContext/imdi:Involvement |
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:CommunicationContext/imdi:SocialContext |
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:CommunicationContext/imdi:EventStructure |
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:CommunicationContext/imdi:Channel |
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:Task |
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:Modalities |
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:Subject |
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:Keys/imdi:Key
+                </Keywords>
+                <ProjectDisplayName>
+                    //imdi:Session/imdi:MDGroup/imdi:Project/imdi:Title
+                </ProjectDisplayName>
+                <LegacyBlob>
+                    //imdi:Session/imdi:MDGroup/imdi:Project/imdi:Contact/imdi:Organisation
+                    //imdi:Session/imdi:MDGroup/imdi:Actors/imdi:Actor/imdi:Description
+                </LegacyBlob>
+                <ProjectDescription>
+                    //imdi:Session/imdi:MDGroup/imdi:Project/imdi:Description
+                </ProjectDescription>
+                <ObjectLanguage>
+                    //imdi:Session/imdi:MDGroup/imdi:Content/imdi:Languages/imdi:Language/imdi:Name
+                </ObjectLanguage>
+                <Creator>
+                    //imdi:Session/imdi:MDGroup/imdi:Actors/imdi:Actor/imdi:FullName[../imdi:Role/text() = "Researcher"]
+                </Creator>
+                <ResourceType>
+                    //imdi:Session/imdi:Resources/imdi:MediaFile/imdi:Type
+                </ResourceType>
             </mapper>
         </query>
         <annotation>
@@ -145,8 +172,8 @@ Example: `./dist/testdata/a5-1/repository.xml`
             <mapper type="groovy">a5.mapper.nl.mpi.eaf.EafAnnotationMapper</mapper>
         </annotation>
         <oai>
-            <fileFilter>.*.cmdi</fileFilter>
-            <repositoryName>A5 Test Repository 1</repositoryName>
+            <fileFilter>.*.imdi</fileFilter>
+            <repositoryName>A5 Test Repository 2</repositoryName>
             <adminEmails>
                 <adminEmail>jochen.graf@uni-koeln.de</adminEmail>
                 <adminEmail>diensteentwicklung-rrzk@uni-koeln.de</adminEmail>
@@ -158,19 +185,14 @@ Example: `./dist/testdata/a5-1/repository.xml`
                     <namespace>http://www.openarchives.org/OAI/2.0/oai_dc/</namespace>
                 </metadataFormat>
                 <metadataFormat>
-                    <prefix>other</prefix>
-                    <schema>http://www.openarchives.org/OAI/2.0/oai_dc.xsd</schema>
-                    <namespace>http://www.openarchives.org/OAI/2.0/other/</namespace>
-                </metadataFormat>
-                <metadataFormat>
-                    <prefix>nodata</prefix>
-                    <schema>http://www.openarchives.org/OAI/2.0/oai_dc.xsd</schema>
-                    <namespace>http://www.openarchives.org/OAI/2.0/nodata/</namespace>
+                    <prefix>cmdi</prefix>
+                    <schema>https://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/1.x/profiles/clarin.eu:cr1:p_1288172614023/xsd</schema>
+                    <namespace>http://www.clarin.eu/cmd/1</namespace>
                 </metadataFormat>
             </metadataFormats>
             <mapper type="xslt">
-                <oai_dc script="cmdi2oai_dc.xsl"/>
-                <other script="cmdi2oai_dc.xsl"/>
+                <oai_dc script="imdi2oai_dc.xsl"></oai_dc>
+                <cmdi script="imdi2cmdi.xsl"></cmdi>
             </mapper>
         </oai>
     </index>
